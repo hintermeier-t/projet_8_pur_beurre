@@ -1,9 +1,14 @@
+from django.db import transaction, IntegrityError
 from django.shortcuts import render
-from forms import SignUpForm
-from models import User
+
+from .forms import SignUpForm
+from .models import User
 
 # Create your views here.
 def signup (request):
+    context = {
+
+    }
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -34,8 +39,8 @@ def signup (request):
                 recommencer votre requête."
 
     else:
-        form = ContactForm()
+        form = SignUpForm()
 
     context['form'] = form
     context['errors'] = form.errors.items()
-    return render(request, 'store/detail.html', context)
+    return render(request, 'account/signup.html', context)
