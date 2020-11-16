@@ -55,21 +55,24 @@ class Database:
                 pass
         
         for product in self.prod:
-            new_product = models.Product.objects.create(
-                name = product.get('product_name_fr'),
-                brand = product.get('brands'),
-                code = product.get('code'),
-                nutriscore = product.get('nutriscore_grade'),
-                description = product.get('generic_name_fr'),
-                picture = product.get('image_url'),
-                url = product.get('url')
-            )
-            categories = [cat for cat in product.get('categories').split(',')]
-            for each in categories:
-                try:
-                    new_product.categories.add(
-                        models.Category.objects.get(name=each)
-                    )
-                except:
-                    pass
-            new_product.save()
+            try:
+                new_product = models.Product.objects.create(
+                    name = product.get('product_name_fr'),
+                    brand = product.get('brands'),
+                    code = product.get('code'),
+                    nutriscore = product.get('nutriscore_grade'),
+                    description = product.get('generic_name_fr'),
+                    picture = product.get('image_url'),
+                    url = product.get('url')
+                )
+                categories = [cat for cat in product.get('categories').split(',')]
+                for each in categories:
+                    try:
+                        new_product.categories.add(
+                            models.Category.objects.get(name=each)
+                        )
+                    except:
+                        pass
+                new_product.save()
+            except:
+                pass

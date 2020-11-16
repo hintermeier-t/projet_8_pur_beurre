@@ -13,6 +13,7 @@ You can get python at : https://www.python.org/downloads/
 
 
 ##INSTALLATION / LAUNCHING THE PROGRAM
+`pipenv install`
 
 
 

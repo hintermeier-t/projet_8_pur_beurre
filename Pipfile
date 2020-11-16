@@ -8,6 +8,8 @@ django = "*"
 black = "*"
 psycopg2-binary = "*"
 django-debug-toolbar = "*"
+requests = "*"
+gunicorn = "*"
 
 [dev-packages]
 black = "*"

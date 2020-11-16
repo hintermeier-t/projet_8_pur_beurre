@@ -1,0 +1,33 @@
+<form class="form-inline" action="{% url 'catalog:signup'%}" method="post">
+    {% csrf_token %}
+
+    <div class="form-group {%if form.name.errors%}has-warning has-feedback{% endif %}">
+      <label for="{{ form.last_name.id_for_label }}" class="control-label">Nom</label>
+      {{ form.last_name }}
+    </div>
+    <div class="form-group {%if form.name.errors%}has-warning has-feedback{% endif %}">
+        <label for="{{ form.first_name.id_for_label }}" class="control-label">Nom</label>
+        {{ form.first_name }}
+      </div>
+    <div class="form-group {%if form.email.errors%}has-warning has-feedback{% endif %}">
+      <label for="{{ form.email.id_for_label }}" class="control-label">E-mail</label>
+      {{ form.email }}
+    </div>
+    <div class="form-group {%if form.password.errors%}has-warning has-feedback{% endif %}">
+        <label for="{{ form.password.id_for_label }}" class="control-label">Mot de Passe</label>
+        {{ form.password }}
+      </div>
+    <!-- <input type="hidden" class="hidden" value="{{ album_id }}" name="album_id"> -->
+
+    <button type="submit" class="btn btn-success">S'inscrire</button>
+  </form>
+
+  {% if errors %}
+<div>
+  {% for key, error in errors %}
+  {% autoescape off %}
+    {{ error }}
+  {% endautoescape %}
+  {% endfor %}
+</div>
+{% endif %}
