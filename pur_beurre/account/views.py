@@ -5,6 +5,8 @@ from .forms import SignUpForm
 from .models import User
 
 # Create your views here.
+def signin(request):
+    
 def signup (request):
     context = {
 
