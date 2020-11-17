@@ -6,7 +6,37 @@ from .models import User
 
 # Create your views here.
 def signin(request):
-    
+    context = {
+
+    }
+    if request.method == 'POST':
+        form = SignInForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+
+            try:
+                with transaction.atomic():
+                    user = User.objects.filter(email=email)
+                    if user.exists():
+                        # User.connect = True ??
+                    else:
+                        raise ValidationError(
+                            _('Cet email: %(email)s n\'est pas enregistré.'),
+                            code='invalid',
+                            params={'email': email},
+                            )
+                    return render(request, 'account/registered.html', context)
+            except IntegrityError:
+                form.errors['internal'] = "Une erreur est survenue. Merci de\
+                recommencer votre requête."
+
+    else:
+        form = SignUpForm()
+
+    context['form'] = form
+    context['errors'] = form.errors.items()
+    return render(request, 'account/signup.html', context)
 def signup (request):
     context = {
 

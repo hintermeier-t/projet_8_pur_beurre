@@ -11,6 +11,11 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
+  --moules: #345a61;
+  --roibos: #c45525;
+  --rigolo: #86ebe6;
+  --caramel: #DE9440;
+  --biscuit: #E8A75D;
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -37,8 +42,8 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-family-sans-serif: "Open Sans", "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, "Scope One", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 *,
@@ -56,6 +61,7 @@ html {
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
+  font-family: "Scope One", sans-serif;;
 }
 
 body {
@@ -82,6 +88,7 @@ hr {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
+  font-family: "Open Sans", sans-serif;
 }
 
 p {
@@ -6076,7 +6083,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #f4623a !important;
+  background-color: var(--roibos) !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -10015,7 +10022,7 @@ hr.light {
 
 #mainNav {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  background-color: rgba(77, 77, 77, 0.219);
+  background-color: rgba(52, 90, 97, 0.25);
   transition: background-color 0.2s ease;
 }
 #mainNav .navbar-brand {
@@ -10039,7 +10046,7 @@ hr.light {
 @media (min-width: 992px) {
   #mainNav {
     box-shadow: none;
-    background-color: transparent;
+    background-color: var(--caramel);
   }
   #mainNav .navbar-brand {
     color: rgba(255, 255, 255, 0.7);
@@ -10145,4 +10152,29 @@ header.masthead h1 {
 
 .text-white-75 {
   color: rgba(255, 255, 255, 0.75);
+}
+
+#search-bar input{
+  width: 100%;
+  background-color: lightgray;
+  color: #000000;
+  
+}
+
+#search-bar input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+#search-bar input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: black;
+}
+
+#search-bar input::-ms-input-placeholder { /* Microsoft Edge */
+  color: black;
+}
+
+.caramel{
+  background-color: var(--caramel);
+  color: var(--moules);
 }
