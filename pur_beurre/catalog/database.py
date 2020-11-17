@@ -38,7 +38,7 @@ class Database:
                 }
         try:
         
-            for index in range(0,10):
+            for index in range(0,50):
                 self.request_params['page'] = index + 1 
                 query = requests.get(self.url_prod, self.request_params)
                 if query.status_code == 200:  #-  if success

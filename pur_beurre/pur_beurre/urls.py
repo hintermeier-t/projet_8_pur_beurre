@@ -22,8 +22,8 @@ from catalog import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('karadoc/', admin.site.urls),
-    path('account/', include('account.urls')),
-    path('catalog/', include('catalog.urls')),
+    path('account/', include('account.urls', namespace='account')),
+    path('catalog/', include('catalog.urls', namespace='catalog')),
 ]
 
 if settings.DEBUG:

@@ -44,3 +44,10 @@ def signup (request):
     context['form'] = form
     context['errors'] = form.errors.items()
     return render(request, 'account/signup.html', context)
+
+def connexion(request):
+    context={
+        'connected': False
+    }
+
+    return render(request, 'account/connexion.html', context)
