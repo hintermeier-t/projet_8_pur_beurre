@@ -60,7 +60,7 @@ class Database:
                     name = product.get('product_name_fr'),
                     brand = product.get('brands'),
                     code = product.get('code'),
-                    nutriscore = product.get('nutriscore_grade'),
+                    nutriscore = product.get('nutriscore_grade').upper(),
                     description = product.get('generic_name_fr'),
                     picture = product.get('image_url'),
                     url = product.get('url')

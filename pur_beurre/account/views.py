@@ -20,6 +20,7 @@ def signin(request):
                     user = User.objects.filter(email=email)
                     if user.exists():
                         # User.connect = True ??
+                        context['user'] = True
                     else:
                         raise ValidationError(
                             _('Cet email: %(email)s n\'est pas enregistré.'),

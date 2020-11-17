@@ -1,0 +1,64 @@
+<div class="col-lg-12" id="masthead">
+    <hr>
+    <h2 class="intro-text text-center">{{ list_title }}</h2>
+    <hr class="detail-separator">
+</div>
+
+{% include 'catalog/search_form.html' %}
+
+{% if products|length_is:"0" %}
+    <div class="text-center">
+        Nous n'avons pas pu trouver le produit demandé. Ré-essayez !
+    </div>
+
+{% else %}
+    {% for product in products %}
+    <div class="col-4 text-center">
+        <a href="{% url 'catalog:detail' product_id=product.id %}">
+            <p>{{ product.name }}</p>
+            <div class='thumbnail'style="height:200px;width:200px;align-content: center;">
+                <img class="img-responsive" src="{{ product.picture }}" style="height:200px;width:200px;" alt="{{ product.name }}">
+                <i class="nutriscoreIcon">{{product.nutriscore}}</i>
+            </div>
+        </a>
+        <h3><a href="{% url 'catalog:detail' product_id=product.id %}"{{product.name}}</a></h3>
+    </div>
+    {% if forloop.counter|divisibleby:3 %}<div clas="clearfix"></div> {% endif %}
+    {% endfor %}
+        {% if paginate %}
+        <div class="clearfix"></div>
+        <nav aria-label="">
+        <ul class="pager">
+            {% if products.has_previous %}
+                <li><a href="?page={{ products.previous_page_number }}">Précédent</a></li>
+            {% endif %}
+            {% if products.has_next %}
+                <li><a href="?page={{ products.next_page_number }}">Suivant</a></li>
+            {% endif %}
+        </ul>
+        </nav>
+        {% endif %}
+{% endif %}
+
+<script>
+    var nutriscore = document.getElementsByClassName('nutriscoreIcon');
+var each;
+for (each of nutriscore) {
+    switch (each.innerHTML){
+        case 'A':
+            each.setAttribute('style','background-color:green;border-radius:50%');
+            break;
+        case 'B':
+          each.setAttribute('style','background-color:greenyellow;border-radius:50%');
+          break;
+        case 'C':
+          each.setAttribute('style','background-color:yellow;border-radius:50%');
+          break;
+        case 'D':
+          each.setAttribute('style','background-color:orange;border-radius:50%');
+          break;
+        default:
+          each.setAttribute('style','background-color:red;border-radius:50%');
+    }
+}
+</script>

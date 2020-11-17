@@ -10178,3 +10178,20 @@ header.masthead h1 {
   background-color: var(--caramel);
   color: var(--moules);
 }
+
+.nutriscoreIcon{
+    color: white;
+    font-size: 150%;
+    width:20%;
+    height: 20%;
+    position: absolute;
+    top: 0%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.thumbnail{
+  position: relative;
+}

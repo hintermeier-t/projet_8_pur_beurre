@@ -20,9 +20,31 @@ def search(request):
         if not products.exists():
             products = Product.objects.filter(code__icontains=query)
        
-    title = "Résultats pour la recherche %s"%query
+    title = ("Résultats pour la recherche \"{}\":".format(query))
     context ={
         'products': products,
         'title': title
     }
     return render(request, 'catalog/search.html', context)
+
+def detail(request):
+    context={
+        
+    }
+    return render(request, 'catalog/detail.html', context)
+
+def results(request):
+    product_list = Product.objects.all()
+    paginator = Paginator(product_list, 9)
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+    context = {
+        'products': products,
+        'paginate': True
+        }
+    return render(request, 'catalog/results.html', context)
