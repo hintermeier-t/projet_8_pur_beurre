@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         {% load static %}
         <meta name="description" content="Du gras, oui; mais de qualité !" />
-        <meta name="author" content="Thomas Hintermeier-Saive pour la société Pur Beurre." />
+        <meta name="author" content="Thomas Hintermeier pour la société Pur Beurre." />
         <title>Pur Beurre</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'catalog/img/pur_beurre_icon.png' %}" />
@@ -19,13 +19,14 @@
         <!-- Third party plugin CSS-->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'catalog/css/bootstrap.min.css' %}" rel="stylesheet" />
         <link href="{% static 'catalog/css/styles.css' %}" rel="stylesheet" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
         <nav class="caramel navbar navbar-expand-lg navbar-dark fixed-top py-3" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top" title="Pur Beurre"><img src="{% static 'catalog/img/pur_beurre_icon.png' %}" alt="Logo Pur Beurre" style="width:10%;">Pur Beurre</a>
+                <a class="navbar-brand js-scroll-trigger" href="{% url 'index'%}#page-top" title="Pur Beurre"><img src="{% static 'catalog/img/pur_beurre_icon.png' %}" alt="Logo Pur Beurre" style="width:10%;">Pur Beurre</a>
                 <span id="search-bar">{%include 'catalog/search_form.html' %}</span>
 
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -38,8 +39,11 @@
         </nav>
         {% block content %}{% endblock %}
         <!-- Footer-->
-        <footer class="bg-dark py-5">
-            <div class="container"><div class="small text-center text-muted">Copyright © 2020 - Start Bootstrap</div></div>
+        <footer class="bg-dark py-3">
+            <div class="row justify-content-center">
+                <div class="col-6 text-center text-muted"><a href="{% url 'catalog:legal'%}">Mentions Légales</a></div>
+                <div class="col-6 text-center text-muted"><a href="{% url 'index'%}#contact">Contact</a></div>
+            </div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
