@@ -15,9 +15,9 @@
     {% for product in products %}
     <div class="col-sm-4 text-center">
         <a href="{% url 'catalog:detail' product_id=product.id %}">
-            <p>{{ product.name }}</p>
+            <p class="py-2">{{ product.name }}</p>
             <div class='thumbnail'style="height:200px;width:200px;align-content:center;">
-                <img class="img-responsive" src="{{ product.picture }}" style="height:200px;width:200px;text-align: center;" alt="{{ product.name }}"></a>
+                <img class="img-responsive" src="{{ product.picture }}" style="height:200px;width:200px;text-align:center;" alt="{{ product.name }}"></a>
                 <i class="nutriscoreIcon">{{product.nutriscore}}</i>
             </div>
         </div>

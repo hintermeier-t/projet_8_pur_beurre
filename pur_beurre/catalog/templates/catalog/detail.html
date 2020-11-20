@@ -1,0 +1,24 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<hr>
+<h1 class="intro-text text-center py-5">{{ product_name }}</h1>
+<hr class="detail-separator">
+<div class="col-md-6">
+  <img src="{{ thumbnail }}" alt="{{ product_name }}" class="img-responsive">
+  <div style="margin-bottom:45px">
+    <h2 class="text-center">Catégories</h2>
+    <p>{{ categories }}</p>
+  </div>
+  <div class="col-md-6">
+    <div style="margin-bottom:45px">
+        <h2 class="text-center">Informations</h2>
+        <ul>
+            <li>Marque: {{product_brand}}</li>
+            <li>Nutriscore: {{ nutriscore }}</li>
+            <li>Description: {{ Description }}</li>
+            <li><a href="{{url}}">Plus d'informations sur OpenFoodFacts</a></li>
+      </ul>>
+    </div>
+
+{% endblock %}

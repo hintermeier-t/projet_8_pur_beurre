@@ -1,7 +1,7 @@
 from django.db import transaction, IntegrityError
 from django.shortcuts import render
 
-from .forms import SignUpForm
+from .forms import SignUpForm, SignInForm
 from .models import User
 
 # Create your views here.
@@ -12,20 +12,20 @@ def signin(request):
     if request.method == 'POST':
         form = SignInForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['email']
+            username = form.cleaned_data['username']
             password = form.cleaned_data['password']
 
             try:
                 with transaction.atomic():
-                    user = User.objects.filter(email=email)
+                    user = User.objects.filter(username=username)
                     if user.exists():
                         # User.connect = True ??
-                        context['user'] = True
+                        context['logged'] = True
                     else:
                         raise ValidationError(
-                            _('Cet email: %(email)s n\'est pas enregistré.'),
+                            _('Cet utilisateur: %(username)s n\'est pas enregistré.'),
                             code='invalid',
-                            params={'email': email},
+                            params={'username': username},
                             )
                     return render(request, 'account/registered.html', context)
             except IntegrityError:
@@ -33,11 +33,12 @@ def signin(request):
                 recommencer votre requête."
 
     else:
-        form = SignUpForm()
+        form = SignInForm()
 
     context['form'] = form
     context['errors'] = form.errors.items()
     return render(request, 'account/signup.html', context)
+
 def signup (request):
     context = {
 

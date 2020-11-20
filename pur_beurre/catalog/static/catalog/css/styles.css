@@ -2108,6 +2108,7 @@ textarea.form-control {
 
 .form-group {
   margin-bottom: 1rem;
+  display: block;
 }
 
 .form-text {
@@ -10187,6 +10188,7 @@ header.masthead h1 {
     position: absolute;
     top: 0%;
     left: 100%;
+    vertical-align: middle;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
@@ -10194,4 +10196,16 @@ header.masthead h1 {
 
 .thumbnail{
   position: relative;
+  display: flex;
+}
+
+.x{font-size:20px; color:#0591e5;}
+.two_x{font-size:30px; color:#ff6600;}  
+.three_x{font-size:40px;color:#0591e5;}  
+.four_x{font-size:50px;color:#ff6600;}  
+.five_x{font-size:60px;color:#0591e5;}  
+.six_x{font-size:70px;color:#ff6600;}
+
+.signUpForm{
+  padding-top: 10%;
 }

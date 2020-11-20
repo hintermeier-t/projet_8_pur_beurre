@@ -1,17 +1,25 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<div class="container">
+  <section class="signUpForm">
 <form class="form-inline"  method="post">
     {% csrf_token %}
 
-    <div class="form-group {%if form.name.errors%}has-warning has-feedback{% endif %}">
+    <div class="form-group {%if form.last_name.errors%}has-warning has-feedback{% endif %}">
       <label for="{{ form.last_name.id_for_label }}" class="control-label">Nom</label>
       {{ form.last_name }}
     </div>
-    <div class="form-group {%if form.name.errors%}has-warning has-feedback{% endif %}">
+    <div class="form-group {%if form.first_name.errors%}has-warning has-feedback{% endif %}">
         <label for="{{ form.first_name.id_for_label }}" class="control-label">Préom</label>
         {{ form.first_name }}
       </div>
     <div class="form-group {%if form.email.errors%}has-warning has-feedback{% endif %}">
       <label for="{{ form.email.id_for_label }}" class="control-label">E-mail</label>
       {{ form.email }}
+    </div>
+    <div class="form-group {%if form.username.errors%}has-warning has-feedback{% endif %}">
+      <label for="{{ form.username.id_for_label }}" class="control-label">Nom d'utilisateur</label>
+      {{ form.username }}
     </div>
     <div class="form-group {%if form.password.errors%}has-warning has-feedback{% endif %}">
         <label for="{{ form.password.id_for_label }}" class="control-label">Mot de Passe</label>
@@ -31,3 +39,6 @@
   {% endfor %}
 </div>
 {% endif %}
+</div>
+</section>
+{% endblock %}

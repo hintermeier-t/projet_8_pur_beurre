@@ -7,6 +7,10 @@ from .models import Product
 
 def index(request):
     context ={}
+    if request.user.is_authenticated:
+        context['logged'] = True
+    else:
+        context['logged'] = False
     return render(request, 'catalog/index.html', context)
 
 def search(request):
@@ -25,26 +29,34 @@ def search(request):
         'products': products,
         'title': title
     }
+    if request.user.is_authenticated:
+        context['logged'] = True
+    else:
+        context['logged'] = False
     return render(request, 'catalog/search.html', context)
 
-def detail(request):
+def detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    categories = " ".join(
+        [category.name for category in product.categories.all()]
+        )
+    context={
+        'product_name': product.name,
+        'nutriscore': product.nutriscore,
+        'description': product.description,
+        'brand': product.brand,
+        'thumbnail': product.picture,
+        'url': product.url
+    }
+    if request.user.is_authenticated:
+        context['logged'] = True
+    else:
+        context['logged'] = False
+    return render(request, 'catalog/detail.html', context)
+
+
+def legal(request):
     context={
         
     }
-    return render(request, 'catalog/detail.html', context)
-
-def results(request):
-    product_list = Product.objects.all()
-    paginator = Paginator(product_list, 9)
-    page = request.GET.get('page')
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
-    context = {
-        'products': products,
-        'paginate': True
-        }
-    return render(request, 'catalog/results.html', context)
+    return render(request, 'catalog/legal.html', context)
