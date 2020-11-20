@@ -1,5 +1,7 @@
+from django.contrib.auth import authenticate, login, logout
 from django.db import transaction, IntegrityError
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 
 from .forms import SignUpForm, SignInForm
 from .models import User
@@ -15,29 +17,19 @@ def signin(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
 
-            try:
-                with transaction.atomic():
-                    user = User.objects.filter(username=username)
-                    if user.exists():
-                        # User.connect = True ??
-                        context['logged'] = True
-                    else:
-                        raise ValidationError(
-                            _('Cet utilisateur: %(username)s n\'est pas enregistré.'),
-                            code='invalid',
-                            params={'username': username},
-                            )
-                    return render(request, 'account/registered.html', context)
-            except IntegrityError:
-                form.errors['internal'] = "Une erreur est survenue. Merci de\
-                recommencer votre requête."
+            user = authenticate(username=username,
+                                    password=password)
+            if user is not None:
+                login(request,user)
+                return redirect('index')
+           
 
     else:
         form = SignInForm()
 
     context['form'] = form
     context['errors'] = form.errors.items()
-    return render(request, 'account/signup.html', context)
+    return render(request, 'account/signin.html', context)
 
 def signup (request):
     context = {

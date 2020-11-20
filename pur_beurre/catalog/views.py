@@ -7,7 +7,7 @@ from .models import Product
 
 def index(request):
     context ={}
-    if request.user.is_authenticated:
+    if 'username' in request.COOKIES.keys():
         context['logged'] = True
     else:
         context['logged'] = False
@@ -29,7 +29,7 @@ def search(request):
         'products': products,
         'title': title
     }
-    if request.user.is_authenticated:
+    if 'username' in request.COOKIES.keys():
         context['logged'] = True
     else:
         context['logged'] = False
@@ -48,7 +48,7 @@ def detail(request, product_id):
         'thumbnail': product.picture,
         'url': product.url
     }
-    if request.user.is_authenticated:
+    if 'username' in request.COOKIES.keys():
         context['logged'] = True
     else:
         context['logged'] = False
