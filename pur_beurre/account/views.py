@@ -1,75 +1,58 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.db import transaction, IntegrityError
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 
 from .forms import SignUpForm, SignInForm
-from .models import User
 
 # Create your views here.
+
 def signin(request):
-    context = {
-
-    }
+    if request.user.is_authenticated:
+        print(request.user.username)
+        return redirect('index')
+     
     if request.method == 'POST':
-        form = SignInForm(request.POST)
+        
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        print(user)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            form = AuthenticationForm()
+            return render(request, 'account/signin.html', {'form':form})
+     
+    else:
+        form = AuthenticationForm()
+    
+    return render(request, 'account/signin.html', {'form':form})
+
+def signup(request):
+ 
+    if request.user.is_authenticated:
+        return redirect('index')
+     
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+ 
         if form.is_valid():
+            form.save()
             username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-
-            user = authenticate(username=username,
-                                    password=password)
-            if user is not None:
-                login(request,user)
-                return redirect('index')
-           
-
+            password = form.cleaned_data['password1']
+            user = authenticate(username = username,password = password)
+            login(request, user)
+            return redirect('index')
+         
+        else:
+            return render(request,'account/signup.html',{'form':form})
+     
     else:
-        form = SignInForm()
-
-    context['form'] = form
-    context['errors'] = form.errors.items()
-    return render(request, 'account/signin.html', context)
-
-def signup (request):
-    context = {
-
-    }
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            password = form.cleaned_data['password']
-
-            try:
-                with transaction.atomic():
-                    user = User.objects.filter(email=email)
-                    if not user.exists():
-                        user = User.objects.create(
-                            email = email,
-                            first_name = first_name,
-                            last_name = last_name,
-                            password = password
-                        )
-                    else:
-                        raise ValidationError(
-                            _('Cet email: %(email)s est déjà enregistré'),
-                            code='invalid',
-                            params={'email': email},
-                            )
-                    return render(request, 'account/registered.html', context)
-            except IntegrityError:
-                form.errors['internal'] = "Une erreur est survenue. Merci de\
-                recommencer votre requête."
-
-    else:
-        form = SignUpForm()
-
-    context['form'] = form
-    context['errors'] = form.errors.items()
-    return render(request, 'account/signup.html', context)
+        form = UserCreationForm()
+        return render(request,'account/signup.html',{'form':form})
 
 def connexion(request):
     context={
@@ -77,3 +60,13 @@ def connexion(request):
     }
 
     return render(request, 'account/connexion.html', context)
+
+def my_account(request):
+    context={}
+    return render(request, 'account/my_account.html', context)
+
+
+def signout(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect('index')
