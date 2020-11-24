@@ -1,6 +1,6 @@
 # Projet 8: Créez une plateforme pour les amateurs de Nutella
 Open Classrooms Python Project n°8 : Créez une plateforme pour les amateurs de Nutella.
-Version 1 11/11/2020
+Version 2 21/11/2020
 
 
 ##GENERAL INFORMATIONS
@@ -20,6 +20,8 @@ You can get python at : https://www.python.org/downloads/
 ##The App :
 The Original app is available at 
 
-##Author
+##Author : 
 Name : Thomas Hintermeier-Saive
 Contact : hintermeier-t@protonmail.com
+
+##Known issues :

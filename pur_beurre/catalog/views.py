@@ -7,10 +7,6 @@ from .models import Product
 
 def index(request):
     context ={}
-    if 'username' in request.COOKIES.keys():
-        context['logged'] = True
-    else:
-        context['logged'] = False
     return render(request, 'catalog/index.html', context)
 
 def search(request):
@@ -29,10 +25,6 @@ def search(request):
         'products': products,
         'title': title
     }
-    if 'username' in request.COOKIES.keys():
-        context['logged'] = True
-    else:
-        context['logged'] = False
     return render(request, 'catalog/search.html', context)
 
 def detail(request, product_id):
@@ -48,10 +40,7 @@ def detail(request, product_id):
         'thumbnail': product.picture,
         'url': product.url
     }
-    if 'username' in request.COOKIES.keys():
-        context['logged'] = True
-    else:
-        context['logged'] = False
+    
     return render(request, 'catalog/detail.html', context)
 
 

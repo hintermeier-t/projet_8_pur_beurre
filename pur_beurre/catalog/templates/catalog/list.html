@@ -15,17 +15,26 @@
     {% for product in products %}
     <div class="col-sm-4 text-center">
         <a href="{% url 'catalog:detail' product_id=product.id %}">
-            <p class="py-2">{{ product.name }}</p>
+            
             <div class='thumbnail'style="height:200px;width:200px;align-content:center;">
                 <img class="img-responsive" src="{{ product.picture }}" style="height:200px;width:200px;text-align:center;" alt="{{ product.name }}"></a>
                 <i class="nutriscoreIcon">{{product.nutriscore}}</i>
             </div>
+            <p class="py-2">{{ product.name }}</p>
+            {% if user.is_authenticated %}
+            <form action="{%url 'account:save'%}" method='POST'>
+                {% csrf_token %}
+                <span class="iconify" data-icon="fa-floppy-o" data-inline="false"></span>
+                <input type="hidden" value='{{product.id}}' name="product" />
+                <input type="submit" value="Sauvegarder" />
+            </form>
+            {% endif %}
         </div>
     
     {% if forloop.counter|divisibleby:3 %} <div class="clearfix"></div>{% endif %}
     {% endfor %}
     
-        {% if paginate %}
+        <!-- {% if paginate %}
         <div class="clearfix"></div>
         <nav aria-label="">
         <ul class="pager">
@@ -39,7 +48,7 @@
         </div>
         </nav>
         {% endif %}
-{% endif %}
+{% endif %} -->
 <div class="clearfix"></div>
 <script>
     var nutriscore = document.getElementsByClassName('nutriscoreIcon');

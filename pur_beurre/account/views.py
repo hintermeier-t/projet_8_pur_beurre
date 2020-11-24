@@ -1,10 +1,13 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.db import transaction, IntegrityError
-from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.db import transaction, IntegrityError
+from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from catalog.models import Product
 
-from .forms import SignUpForm, SignInForm
+from catalog import views as c
+from .models import Favorite
 
 # Create your views here.
 
@@ -70,3 +73,16 @@ def signout(request):
     if request.user.is_authenticated:
         logout(request)
         return redirect('index')
+
+def save(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            product_id = request.POST['product']
+            product = get_object_or_404(Product, pk=product_id)
+            user = get_object_or_404(User, pk=request.user.id)
+            new_favorite = Favorite.objects.create(
+                user = user,
+                product = product
+            )
+            return HttpResponse('Sauvegardé')
+    return HttpResponse('Problème de sauvegarde')
