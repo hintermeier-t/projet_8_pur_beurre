@@ -10,6 +10,7 @@ def index(request):
     return render(request, 'catalog/index.html', context)
 
 def search(request):
+
     query = request.GET.get('query')
     if not query :
         products = Product.objects.all()
@@ -23,6 +24,7 @@ def search(request):
     title = ("Résultats pour la recherche \"{}\":".format(query))
     context ={
         'products': products,
+        'query': query,
         'title': title
     }
     return render(request, 'catalog/search.html', context)

@@ -137,3 +137,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGOUT_REDIRECT_URL = 'index'
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_COOKIE_AGE = 60*15
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

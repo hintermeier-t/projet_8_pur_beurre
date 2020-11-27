@@ -22,11 +22,9 @@
             </div>
             <p class="py-2">{{ product.name }}</p>
             {% if user.is_authenticated %}
-            <form action="{%url 'account:save'%}" method='POST'>
                 {% csrf_token %}
                 <span class="iconify" data-icon="fa-floppy-o" data-inline="false"></span>
-                <input type="hidden" value='{{product.id}}' name="product" />
-                <input type="submit" value="Sauvegarder" />
+                <button id='{{product.id}}' onclick="save(this.id, &quot;{%url 'account:save' %}&quot;)">Sauvegarder</button>
             </form>
             {% endif %}
         </div>
@@ -50,25 +48,3 @@
         {% endif %}
 {% endif %} -->
 <div class="clearfix"></div>
-<script>
-    var nutriscore = document.getElementsByClassName('nutriscoreIcon');
-var each;
-for (each of nutriscore) {
-    switch (each.innerHTML){
-        case 'A':
-            each.setAttribute('style','background-color:green;border-radius:50%');
-            break;
-        case 'B':
-          each.setAttribute('style','background-color:greenyellow;border-radius:50%');
-          break;
-        case 'C':
-          each.setAttribute('style','background-color:yellow;border-radius:50%');
-          break;
-        case 'D':
-          each.setAttribute('style','background-color:orange;border-radius:50%');
-          break;
-        default:
-          each.setAttribute('style','background-color:red;border-radius:50%');
-    }
-}
-</script>

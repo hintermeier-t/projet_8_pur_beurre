@@ -10188,7 +10188,7 @@ header.masthead h1 {
     position: absolute;
     top: 0%;
     left: 100%;
-    vertical-align: middle;
+    vertical-align: center;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;

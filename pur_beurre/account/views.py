@@ -57,13 +57,6 @@ def signup(request):
         form = UserCreationForm()
         return render(request,'account/signup.html',{'form':form})
 
-def connexion(request):
-    context={
-        'connected': False
-    }
-
-    return render(request, 'account/connexion.html', context)
-
 def my_account(request):
     context={}
     return render(request, 'account/my_account.html', context)
@@ -76,13 +69,21 @@ def signout(request):
 
 def save(request):
     if request.user.is_authenticated:
-        if request.method == 'POST':
-            product_id = request.POST['product']
+        if request.method == 'GET':
+            product_id = request.GET['product']
             product = get_object_or_404(Product, pk=product_id)
             user = get_object_or_404(User, pk=request.user.id)
             new_favorite = Favorite.objects.create(
                 user = user,
                 product = product
             )
-            return HttpResponse('Sauvegardé')
-    return HttpResponse('Problème de sauvegarde')
+            data = {
+                'Status': 'OK'
+            }
+            return JsonResponse(data)
+
+    data = {
+        'Status': 'Failure'
+    }
+    return JsonResponse(data)
+        
