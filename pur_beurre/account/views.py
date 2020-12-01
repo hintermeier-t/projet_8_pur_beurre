@@ -86,4 +86,18 @@ def save(request):
         'Status': 'Failure'
     }
     return JsonResponse(data)
-        
+
+def mail_save(request):
+    if request.user.is_authenticated:
+         if request.method == 'GET':
+            mail = request.GET['email']
+            user = get_object_or_404(User, pk=request.user.id)
+            user.email = mail
+            user.save()
+            
+            return HttpResponse('my_account')
+
+    data = {
+        'Status': 'Failure'
+    }
+    return HttpResponse(data)

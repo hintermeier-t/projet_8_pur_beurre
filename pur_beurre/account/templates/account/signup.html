@@ -1,11 +1,13 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
-<div class="container">
+<div id="signup" class="container">
   <section class="signUpForm">
 <form class="form-inline" action="" method="POST">
     {% csrf_token %}
 
-    {{ form.as_table }}
+    <table>
+      {{ form.as_table }}
+    </table>
 
     <button type="submit" class="btn btn-success">S'inscrire</button>
   </form>

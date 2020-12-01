@@ -72,7 +72,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color:var(--biscuit);
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -4330,10 +4330,10 @@ input[type=button].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+
+  height:40%;
 }
 .card > hr {
   margin-right: 0;
@@ -10207,5 +10207,44 @@ header.masthead h1 {
 .six_x{font-size:70px;color:#ff6600;}
 
 .signUpForm{
-  padding-top: 10%;
+  padding: 10px;
+  align-content: center;
+  background-color: #345a6199;
+  border-radius: 5px;
+}
+
+.card-back{
+  background-color: #345a6199;
+  border-radius: 10px;
+  margin: 2%;
+  color:  #FFFFFF;
+}
+
+.card-back:first-child{
+  margin-left: 0%;
+}
+
+#signin{
+  margin-top:100px;
+  padding-top: 10px;
+  width: 100%;
+  height: 50%;
+  background: url("../img/greg-jeanneau-YTbFHT9_IhY-unsplash.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+#signup{
+  color: #ffffff;
+  margin-top:100px;
+  padding-top: 10px;
+  width: 100%;
+  height: 50%;
+  background: url("../img/olenka-kotyk-eqsEZNCm4-c-unsplash.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
 }
