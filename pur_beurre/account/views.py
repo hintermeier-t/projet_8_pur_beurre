@@ -13,7 +13,6 @@ from .models import Favorite
 
 def signin(request):
     if request.user.is_authenticated:
-        print(request.user.username)
         return redirect('index')
      
     if request.method == 'POST':
@@ -58,8 +57,10 @@ def signup(request):
         return render(request,'account/signup.html',{'form':form})
 
 def my_account(request):
-    context={}
-    return render(request, 'account/my_account.html', context)
+    if request.user.is_authenticated:
+        return render(request, 'account/my_account.html')
+    else:
+        return redirect(request, 'index')
 
 
 def signout(request):

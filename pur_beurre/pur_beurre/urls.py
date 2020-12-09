@@ -24,6 +24,7 @@ urlpatterns = [
     path('karadoc/', admin.site.urls),
     path('account/', include('account.urls', namespace='account')),
     path('catalog/', include('catalog.urls', namespace='catalog')),
+    path('legal/', views.legal, name='legal')
 ]
 
 if settings.DEBUG:

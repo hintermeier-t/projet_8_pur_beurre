@@ -40,7 +40,8 @@ def detail(request, product_id):
         'description': product.description,
         'brand': product.brand,
         'thumbnail': product.picture,
-        'url': product.url
+        'url': product.url,
+        'categories': product.categories.all()
     }
     
     return render(request, 'catalog/detail.html', context)

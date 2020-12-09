@@ -67,7 +67,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 body {
   margin: 0;
   font-family: "Merriweather", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
@@ -579,6 +579,11 @@ pre code {
 @media (min-width: 1200px) {
   .container-xl, .container-lg, .container-md, .container-sm, .container {
     max-width: 1140px;
+  }
+}
+@media (min-width: 1920px) {
+  .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1900px;
   }
 }
 .row {
@@ -10229,10 +10234,7 @@ header.masthead h1 {
   padding-top: 10px;
   width: 100%;
   height: 50%;
-  background: url("../img/greg-jeanneau-YTbFHT9_IhY-unsplash.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
+  background: url("../img/greg-jeanneau-YTbFHT9_IhY-unsplash.jpg") center no-repeat scroll;
   background-size: cover;
 }
 
@@ -10242,9 +10244,31 @@ header.masthead h1 {
   padding-top: 10px;
   width: 100%;
   height: 50%;
-  background: url("../img/olenka-kotyk-eqsEZNCm4-c-unsplash.jpg");
+  background: url("../img/olenka-kotyk-eqsEZNCm4-c-unsplash.jpg") center no-repeat scroll;
+}
+
+#productHeader{
+  margin-top: 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#detail{
+  color: #ffffff;
+  margin-top:100px;
+  padding-top: 10px;
+  width: 100%;
+  height: 50%;
+  background: var(--moules);
+  border-radius: 5px;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
+}
+
+#copyrights{
+  font-size: 1.5rem;
+  color:  #FFFFFF;
+  background-color: var(--moules);
 }
