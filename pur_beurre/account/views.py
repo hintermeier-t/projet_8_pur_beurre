@@ -20,13 +20,12 @@ def signin(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
-        print(user)
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return redirect('index', {'Logged': True})
         else:
             form = AuthenticationForm()
-            return render(request, 'account/signin.html', {'form':form})
+            return render(request, 'account/signin.html', {'form':form, 'Error': 'Invalid'})
      
     else:
         form = AuthenticationForm()
@@ -57,6 +56,7 @@ def signup(request):
         return render(request,'account/signup.html',{'form':form})
 
 def my_account(request):
+
     if request.user.is_authenticated:
         return render(request, 'account/my_account.html')
     else:
@@ -81,12 +81,9 @@ def save(request):
             data = {
                 'Status': 'OK'
             }
-            return JsonResponse(data)
+            return HttpResponse('209')
 
-    data = {
-        'Status': 'Failure'
-    }
-    return JsonResponse(data)
+    return HttpResponse('500')
 
 def mail_save(request):
     if request.user.is_authenticated:
@@ -95,10 +92,5 @@ def mail_save(request):
             user = get_object_or_404(User, pk=request.user.id)
             user.email = mail
             user.save()
-            
-            return HttpResponse('my_account')
-
-    data = {
-        'Status': 'Failure'
-    }
-    return HttpResponse(data)
+            return HttpResponse('209')
+    return HttpResponse('500')
