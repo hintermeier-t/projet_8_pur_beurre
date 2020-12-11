@@ -70,6 +70,8 @@ class AccountPageTestCase(TestCase):
         )
 
     def test_account_not_logged_in(self):
+        
+    def test_account_logged_in(self):
         self.client.login(
             username = self.username,
             password = self.password

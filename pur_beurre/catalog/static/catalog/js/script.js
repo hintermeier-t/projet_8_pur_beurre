@@ -11,13 +11,16 @@ function save(clicked, url){
     dataType: "json",
     success: function (data) {
         // any process in data
-        alert("successfull")
+        alert("Produit sauvegardé")
     },
     failure: function () {
-        alert("failure");
+        alert("Impossible");
     }
 });
-alert('Produit sauvegardé');
+var el = document.getElementById(String(clicked));
+el.style.backgroundColor = "darkgrey"
+el.disabled = true;
+
 }
 
 function mailModifier(url){
@@ -41,11 +44,34 @@ function mailSave(url){
     dataType: "json",
     success: function (data) {
         // any process in data
-        alert("successfull")
+        alert("Mail sauvegardé")
     },
     failure: function () {
-        alert("failure");
+        alert("Une erreur est survenue");
     }
 });
-  alert('Votre email est sauvegardé');
+}
+
+function delete_fav(clicked, url){
+  //Function that call 'delete' view
+  $.ajax({
+    type: "GET",
+    url: url,
+    data: {
+        "product": clicked,
+    },
+    dataType: "json",
+    success: function (data) {
+        // any process in data
+        alert("Produit retiré des favoris")
+        window.location.reload()
+    },
+    failure: function () {
+        alert("Impossible");
+    }
+});
+var el = document.getElementById(String(clicked));
+el.style.backgroundColor = "darkgrey"
+el.disabled = true;
+
 }

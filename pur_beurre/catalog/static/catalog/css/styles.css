@@ -10185,23 +10185,25 @@ header.masthead h1 {
   color: var(--moules);
 }
 
-.nutriscoreIcon{
+.nutriscoreIcon img{
     color: white;
-    font-size: 150%;
-    width:20%;
-    height: 20%;
-    position: absolute;
-    top: 0%;
-    left: 100%;
+    width:150px;
     vertical-align: center;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
     text-align: center;
 }
+.p_name{
+  color:#FFFFFF;
+  background-color: var(--moules);
+  border-radius: 5px;
+  margin: 1px;
+}
 
-.thumbnail{
-  position: relative;
-  display: flex;
+.thumbnail {
+  text-align: center;
+  background-color: transparent;
+  height: 200px;
+  width: 200px;
+  border: none;
 }
 
 .x{font-size:20px; color:#0591e5;}
@@ -10238,6 +10240,10 @@ header.masthead h1 {
   background-size: cover;
 }
 
+#signin input{
+  color:#000;
+}
+
 #signup{
   color: #ffffff;
   margin-top:100px;
@@ -10247,6 +10253,9 @@ header.masthead h1 {
   background: url("../img/olenka-kotyk-eqsEZNCm4-c-unsplash.jpg") center no-repeat scroll;
 }
 
+#signup input{
+  color: #000;
+}
 #productHeader{
   margin-top: 70px;
   background-repeat: no-repeat;
@@ -10258,12 +10267,8 @@ header.masthead h1 {
   margin-top:100px;
   padding-top: 10px;
   width: 100%;
-  height: 50%;
   background: var(--moules);
   border-radius: 5px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
   background-size: cover;
 }
 
