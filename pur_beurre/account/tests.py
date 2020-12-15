@@ -69,8 +69,6 @@ class AccountPageTestCase(TestCase):
             password = self.password
         )
 
-    def test_account_not_logged_in(self):
-        
     def test_account_logged_in(self):
         self.client.login(
             username = self.username,
@@ -161,6 +159,21 @@ class SaveFavoriteTestCase(TestCase):
             {'product': self.product.id}
         )
         self.assertEqual(request.content, b'500')
+    
+    #- Test with user logged in, wrong ID
+    def test_new_favorite_wrong_id(self):
+        self.client.login(
+            username=self.username,
+            password=self.password
+            )
+        favorites_old_count = Favorite.objects.count()
+        request = self.client.get(
+            reverse('account:save'),
+            {'product': 123456789}
+        )
+        self.assertEqual(request.status_code, 404)
+        favorites_new_count = Favorite.objects.count()
+        self.assertEqual(favorites_new_count, favorites_old_count)
 
     #- test a Favorite is saved
     def test_new_favorite_logged_in(self):
@@ -176,3 +189,61 @@ class SaveFavoriteTestCase(TestCase):
         self.assertEqual(request.content, b'209')
         favorites_new_count = Favorite.objects.count()
         self.assertEqual(favorites_new_count, favorites_old_count+1)
+
+
+class DeleteFavoriteTestCase(TestCase):
+    def setUp(self):
+        self.username = "SarahV"
+        self.password = "LullabyOfBirdland"
+        self.product = Product.objects.create(
+            name = 'Produit à manger',
+            brand = 'Chuipariche',
+            code = '1234567890123',
+            nutriscore = 'B',
+            description = 'C\'est bon à cuisiner',
+            picture = 'truc.com/image.jpg',
+            url = 'truc.com/fiche.html',
+        )
+
+        self.user = User.objects.create_user(
+            username = self.username,
+            password = self.password
+        )
+        self.favorite = Favorite.objects.get_or_create(
+                user = self.user,
+                product = self.product
+            )
+
+    #- Test if the user is not logged in
+    def test_del_favorite_not_logged_in(self):
+        favorites_old_count = Favorite.objects.count()
+        request = self.client.get(
+            reverse('account:delete'),
+            {'product': self.product.id}
+        )
+        self.assertEqual(request.content, b'500')
+
+    #- Test with logged user wrong product
+    def test_del_favorite_wrong_id(self):
+        self.client.login(
+            username=self.username,
+            password=self.password
+            )
+        request = self.client.get(
+            reverse('account:delete'),
+            {'product': 0}
+        )
+        self.assertEqual(request.status_code, 404)
+
+    #- Test with logged user, product ok
+    def test_del_favorite_logged_in(self):
+        self.client.login(
+            username=self.username,
+            password=self.password
+            )
+        request = self.client.get(
+            reverse('account:delete'),
+            {'product': self.product.id}
+        )
+        self.assertEqual(request.content, b'209')
+        self.assertEqual(Favorite.objects.count(), 0)

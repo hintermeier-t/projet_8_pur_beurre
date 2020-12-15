@@ -55,7 +55,6 @@ def signup(request):
         return render(request,'account/signup.html',{'form':form})
 
 def my_account(request):
-
     if request.user.is_authenticated:
         return render(request, 'account/my_account.html')
     else:
