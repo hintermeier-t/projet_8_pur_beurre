@@ -10,17 +10,14 @@
     <div class="text-center">
         Nous n'avons pas pu trouver le produit demandé. Ré-essayez !
     </div>
-
+    {% load static %}
 {% else %}
     {% for product in products %}
-    <div style="margin-top:20px; " class="col-sm-4 text-center">
+    <div style="margin-top:20px;" class="col-sm-4 text-center">
         <a href="{% url 'catalog:detail' product_id=product.id %}">
-            
-            <div class='thumbnail'style="height:200px;width:200px;text-align:center;">
-                <img class="img-responsive mx-auto d-block" src="{{ product.picture }}" style="height:200px;width:200px;text-align:center;" alt="{{ product.name }}"></a>
-                <i class="nutriscoreIcon">{{product.nutriscore}}</i>
-            </div>
-            <p class="py-2">{{ product.name }}</p>
+                <img class="thumbnail mx-auto d-block" src="{{ product.picture }}" alt="{{ product.name }}"></a>
+                <div class="nutriscoreIcon">{{product.nutriscore}}</div>
+            <p class="py-2 p_name">{{ product.name }}</p>
             {% if user.is_authenticated %}
                 {% csrf_token %}
                 <span class="iconify" data-icon="fa-floppy-o" data-inline="false"></span>
@@ -28,45 +25,33 @@
             </form>
             {% endif %}
         </div>
-    
+    </div>
     {% if forloop.counter|divisibleby:3 %} <div class="clearfix"></div>{% endif %}
     {% endfor %}
-    
-        <!-- {% if paginate %}
-        <div class="clearfix"></div>
-        <nav aria-label="">
-        <ul class="pager">
-            {% if products.has_previous %}
-                <li><a href="?page={{ products.previous_page_number }}">Précédent</a></li>
-            {% endif %}
-            {% if products.has_next %}
-                <li><a href="?page={{ products.next_page_number }}">Suivant</a></li>
-            {% endif %}
-        </ul>
-        </div>
-        </nav>
-        {% endif %}
-{% endif %} -->
 <div class="clearfix"></div>
+
+{% endif %}
 <script>
     var nutriscore = document.getElementsByClassName('nutriscoreIcon');
-var each;
-for (each of nutriscore) {
-    switch (each.innerHTML){
+var e;
+for (e of nutriscore) {
+    switch (e.innerHTML){
         case 'A':
-            each.setAttribute('style','background-color:green;border-radius:50%');
-            break;
+            e.innerHTML = e.innerHTML.replace('A',"<img src=\"{% static 'catalog/img/nutriscore-A.png' %}\" alt='Nutricore A'>");
+             break;
         case 'B':
-          each.setAttribute('style','background-color:greenyellow;border-radius:50%');
-          break;
+        e.innerHTML = e.innerHTML.replace('B',"<img src=\"{% static 'catalog/img/nutriscore-B.png' %}\" alt='Nutricore B'>");
+
+             break;
         case 'C':
-          each.setAttribute('style','background-color:yellow;border-radius:50%');
-          break;
+        e.innerHTML = e.innerHTML.replace('C',"<img src=\"{% static 'catalog/img/nutriscore-C.png' %}\" alt='Nutricore C'>");
+             break;
         case 'D':
-          each.setAttribute('style','background-color:orange;border-radius:50%');
-          break;
+        e.innerHTML = e.innerHTML.replace('D',"<img src=\"{% static 'catalog/img/nutriscore-D.png' %}\" alt='Nutricore D'>");
+             break;
         default:
-          each.setAttribute('style','background-color:red;border-radius:50%');
+          e.innerHTML = e.innerHTML.replace('E',"<img src=\"{% static 'catalog/img/nutriscore-E.png' %}\" alt='Nutricore E'>");
+          break;
     }
 }
 </script>

@@ -10,6 +10,7 @@ psycopg2-binary = "*"
 django-debug-toolbar = "*"
 requests = "*"
 gunicorn = "*"
+selenium = "*"
 
 [dev-packages]
 black = "*"

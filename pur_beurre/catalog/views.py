@@ -14,7 +14,6 @@ def search(request):
     query = request.GET.get('query')
     if not query :
         products = Product.objects.all()
-        message = "Aucun produit n'est demandé"
     else:
         products = Product.objects.filter(name__icontains=query)
 
