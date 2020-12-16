@@ -128,3 +128,5 @@ def delete(request):
             return HttpResponse('209')
 
     return HttpResponse('500')
+
+#- Selenium tests

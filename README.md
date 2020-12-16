@@ -13,7 +13,9 @@ You can get python at : https://www.python.org/downloads/
 
 
 ##INSTALLATION / LAUNCHING THE PROGRAM
-`pipenv install`
+`pipenv install``
+to run locally access "pur_beurre" folder
+`python manage.py runserver
 
 
 
