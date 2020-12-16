@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from os import getenv
+import os
 
 import dj_database_url
 from pathlib import Path
@@ -89,7 +89,7 @@ DATABASES = {
     }
 }
 
-SECRET_KEY = '#qoy#3!f#jqt0mm!%q48plo1a_#)ik*)e73n%n(3@!o7=v%wo7' #getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
