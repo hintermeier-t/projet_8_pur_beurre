@@ -87,10 +87,11 @@ DATABASES = {
         'PASSWORD': '2s7gix9u',
         'HOST': '',
         'PORT': '5432',
+        'CHARSET': 'UTF-8'
     }
 }
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = '#qoy#3!f#jqt0mm!%q48plo1a_#)ik*)e73n%n(3@!o7=v%wo7' #os.getenv('SECRET_KEY')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
