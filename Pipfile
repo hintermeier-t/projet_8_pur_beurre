@@ -11,6 +11,8 @@ django-debug-toolbar = "*"
 requests = "*"
 gunicorn = "*"
 selenium = "*"
+dj-database-url = "*"
+whitenoise = "*"
 
 [dev-packages]
 black = "*"
