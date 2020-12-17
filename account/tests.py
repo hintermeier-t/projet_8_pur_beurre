@@ -1,6 +1,8 @@
 """
 Testing 'Account' app module
 """
+
+#- Django modules
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.template import RequestContext
@@ -8,6 +10,12 @@ from django.test import TestCase, Client
 from django.test.client import RequestFactory
 from django.urls import reverse
 
+#- Selenium modules
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from webdriver_manager.firefox import GeckoDriverManager
+
+#- Custom modules
 from .models import Favorite
 from catalog.models import Product
 
@@ -247,3 +255,33 @@ class DeleteFavoriteTestCase(TestCase):
         )
         self.assertEqual(request.content, b'209')
         self.assertEqual(Favorite.objects.count(), 0)
+
+
+#- Selenium tests
+class SeleniumTests(TestCase):
+
+    def setUp(self):
+        self.driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+
+    def test_connection_website(self):
+        driver = self.driver
+        driver.get("http://127.0.0.1:8000")
+        self.assertIn("Pur Beurre", driver.title)
+
+    def test_register_form(self):
+        driver = self.driver
+        driver.get("http://127.0.0.1:8000/account/signup")
+        username = driver.find_element_by_name("username")
+        password_one = driver.find_element_by_name("password1")
+        password_two = driver.find_element_by_name("password2")
+        username.send_keys("ArtBlakey")
+        password_one.send_keys("b2eZu45ipGRe6")
+        password_two.send_keys("b2eZu45ipGRe6")
+        password_two.send_keys(Keys.RETURN)
+        #- If the form is valid, fields should be empty
+        self.assertEqual(password_one.text, "")
+        self.assertEqual(password_two.text, "")
+        self.assertEqual(username.text, "")
+
+    def tearDown(self):
+        self.driver.close()

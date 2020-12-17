@@ -14,6 +14,7 @@ selenium = "*"
 dj-database-url = "*"
 whitenoise = "*"
 django-heroku = "*"
+webdriver-manager = "*"
 
 [dev-packages]
 black = "*"
