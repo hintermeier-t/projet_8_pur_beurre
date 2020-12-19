@@ -8,17 +8,19 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('account', '0002_auto_20201121_1045'),
+        ("account", "0002_auto_20201121_1045"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='favorite',
-            name='user',
+            model_name="favorite",
+            name="user",
         ),
         migrations.AddField(
-            model_name='favorite',
-            name='user',
-            field=models.ManyToManyField(blank=True, related_name='Favoris', to=settings.AUTH_USER_MODEL),
+            model_name="favorite",
+            name="user",
+            field=models.ManyToManyField(
+                blank=True, related_name="Favoris", to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

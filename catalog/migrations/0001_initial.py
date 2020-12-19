@@ -7,29 +7,58 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=75, unique=True, verbose_name='Nom')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=75, unique=True, verbose_name="Nom"),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200, verbose_name='Nom')),
-                ('brand', models.CharField(max_length=200, verbose_name='Marque')),
-                ('code', models.CharField(max_length=13, verbose_name='Code barre')),
-                ('nutriscore', models.CharField(max_length=1, verbose_name='Nutriscore')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='Description')),
-                ('picture', models.URLField()),
-                ('url', models.URLField()),
-                ('categories', models.ManyToManyField(blank=True, related_name='Catégories', to='catalog.Category')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200, verbose_name="Nom")),
+                ("brand", models.CharField(max_length=200, verbose_name="Marque")),
+                ("code", models.CharField(max_length=13, verbose_name="Code barre")),
+                (
+                    "nutriscore",
+                    models.CharField(max_length=1, verbose_name="Nutriscore"),
+                ),
+                (
+                    "description",
+                    models.TextField(blank=True, null=True, verbose_name="Description"),
+                ),
+                ("picture", models.URLField()),
+                ("url", models.URLField()),
+                (
+                    "categories",
+                    models.ManyToManyField(
+                        blank=True, related_name="Catégories", to="catalog.Category"
+                    ),
+                ),
             ],
         ),
     ]

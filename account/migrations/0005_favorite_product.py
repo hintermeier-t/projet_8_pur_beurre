@@ -7,14 +7,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0001_initial'),
-        ('account', '0004_auto_20201121_1131'),
+        ("catalog", "0001_initial"),
+        ("account", "0004_auto_20201121_1131"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='favorite',
-            name='product',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='catalog.product'),
+            model_name="favorite",
+            name="product",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="catalog.product",
+            ),
         ),
     ]

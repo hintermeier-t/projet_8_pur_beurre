@@ -20,15 +20,16 @@ from django.conf import settings
 from catalog import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('karadoc/', admin.site.urls),
-    path('account/', include('account.urls', namespace='account')),
-    path('catalog/', include('catalog.urls', namespace='catalog')),
-    path('legal/', views.legal, name='legal')
+    path("", views.index, name="index"),
+    path("karadoc/", admin.site.urls),
+    path("account/", include("account.urls", namespace="account")),
+    path("catalog/", include("catalog.urls", namespace="catalog")),
+    path("legal/", views.legal, name="legal"),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns = [
-     path('__debug__/', include(debug_toolbar.urls)),
+        path("__debug__/", include(debug_toolbar.urls)),
     ] + urlpatterns

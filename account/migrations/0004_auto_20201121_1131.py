@@ -9,21 +9,25 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('account', '0003_auto_20201121_1121'),
+        ("account", "0003_auto_20201121_1121"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='favorite',
-            name='product',
+            model_name="favorite",
+            name="product",
         ),
         migrations.RemoveField(
-            model_name='favorite',
-            name='user',
+            model_name="favorite",
+            name="user",
         ),
         migrations.AddField(
-            model_name='favorite',
-            name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="favorite",
+            name="user",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

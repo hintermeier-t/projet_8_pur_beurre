@@ -10,21 +10,45 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('catalog', '0001_initial'),
+        ("catalog", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Favorite',
+            name="Favorite",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('base_product', models.ManyToManyField(blank=True, related_name='Produit', to='catalog.Product')),
-                ('substitute', models.ManyToManyField(blank=True, related_name='Substitution', to='catalog.Product')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "base_product",
+                    models.ManyToManyField(
+                        blank=True, related_name="Produit", to="catalog.Product"
+                    ),
+                ),
+                (
+                    "substitute",
+                    models.ManyToManyField(
+                        blank=True, related_name="Substitution", to="catalog.Product"
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Favoris',
+                "verbose_name": "Favoris",
             },
         ),
     ]

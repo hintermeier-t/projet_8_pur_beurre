@@ -6,17 +6,17 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('account', '0001_initial'),
+        ("account", "0001_initial"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='favorite',
-            old_name='base_product',
-            new_name='product',
+            model_name="favorite",
+            old_name="base_product",
+            new_name="product",
         ),
         migrations.RemoveField(
-            model_name='favorite',
-            name='substitute',
+            model_name="favorite",
+            name="substitute",
         ),
     ]

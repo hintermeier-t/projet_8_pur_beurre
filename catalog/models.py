@@ -1,6 +1,7 @@
 from django.db import models
 
-class Category (models.Model):
+
+class Category(models.Model):
     name = models.CharField("Nom", max_length=75, unique=True)
 
     def __str__(self):

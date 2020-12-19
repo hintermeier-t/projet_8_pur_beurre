@@ -9,109 +9,206 @@ from django.urls import reverse
 from .models import Product, Category
 
 
-#- Index page
+# - Index page
 class IndexPageTestCase(TestCase):
-    #- Index page returns 200
+    """
+    Testing index view.
+    """
+
+    # - Index page returns 200
     def test_index_page(self):
-        request = self.client.get(reverse('index'))
+        """
+        Accessing index view.
+
+        Returns 200.
+        """
+        request = self.client.get(reverse("index"))
         self.assertEqual(request.status_code, 200)
 
-#- Search page
-    #- Search page returns 200 with query
-    #- Search page returns 200 without query
-
-#- Detail page
+# - Detail page
 class DetailPageTestCase(TestCase):
+    """
+    Testing detail view.
+    
+    Attributes (setUp method) :
+    ---------------------------
+    :self.product (Product): a Product to find
+
+    Tests:
+    ------
+    :test_detail_page_200(self): Request a Product's details.
+    :test_detail_page_204(self): Request a non existing Product's detail.
+        credentials.
+    """
+
     def setUp(self):
+        """
+        Tests setup.
+        """
+
         product_test = Product.objects.create(
-            name = 'Produit à manger',
-            brand = 'Chuipariche',
-            code = '1234567890123',
-            nutriscore = 'B',
-            description = 'C\'est bon à cuisiner',
-            picture = 'truc.com/image.jpg',
-            url = 'truc.com/fiche.html',
+            name="Produit à manger",
+            brand="Chuipariche",
+            code="1234567890123",
+            nutriscore="B",
+            description="C'est bon à cuisiner",
+            picture="truc.com/image.jpg",
+            url="truc.com/fiche.html",
         )
-        self.product = Product.objects.get(name='Produit à manger')
-        
-    #- If item exists : returns 200
+        self.product = Product.objects.get(name="Produit à manger")
+
+    # - If item exists : returns 200
     def test_detail_page_200(self):
+        """
+        Conditions:
+        -----------
+        *Product does exist.
+
+        Assertions:
+        -----------
+        *Status Code = 200.
+        """
+
         product_id = self.product.id
-        request =  self.client.get(reverse(
-            'catalog:detail',
-            args=(product_id,)))
+        request = self.client.get(reverse("catalog:detail", args=(product_id,)))
         self.assertEqual(request.status_code, 200)
 
-    #- If item does not exist : returns 404
+    # - If item does not exist : returns 404
     def test_detail_page_404(self):
+        """
+        Conditions:
+        -----------
+        *Product does not exist.
+
+        Assertions:
+        -----------
+        *Status Code = 404.
+        """
+        
         product_id = self.product.id + 1
-        request =  self.client.get(reverse(
-            'catalog:detail',
-            args=(product_id,)))
+        request = self.client.get(reverse("catalog:detail", args=(product_id,)))
         self.assertEqual(request.status_code, 404)
 
-#- Legal page
+
+# - Legal page
 class LegalPageTestCase(TestCase):
-    #- Returns 200
+    """
+    Testing legal view.
+    """
+
+    # - Returns 200
     def test_legal_page(self):
-        request = self.client.get(reverse('legal'))
+        """
+        Accessing legal page.
+
+        Returns 200.
+        """
+
+        request = self.client.get(reverse("legal"))
         self.assertEqual(request.status_code, 200)
 
-#- Search function
+
+# - Search function
 class SearchPageTestCase(TestCase):
+    """
+    Testing search view.
+    
+    Attributes (setUp method) :
+    ---------------------------
+    :self.product_one (Product): a Product to find;
+    :self.product_two (Product): another Product to find.
+
+    Tests:
+    ------
+    :test_search_without_query(self): Enter an empty form;
+    :test_search_with_name_query(self): Request a Product by its name;
+    :test_search_with_code_query(self): Request a Product by its barcode.
+        credentials.
+    """
+
     def setUp(self):
+        """
+        Tests setup.
+        """
+
         self.product_one = Product.objects.create(
-            name = 'Produit à manger',
-            brand = 'Chuipariche',
-            code = '1234567890123',
-            nutriscore = 'B',
-            description = 'C\'est bon à cuisiner',
-            picture = 'truc.com/image.jpg',
-            url = 'truc.com/fiche.html',
+            name="Produit à manger",
+            brand="Chuipariche",
+            code="1234567890123",
+            nutriscore="B",
+            description="C'est bon à cuisiner",
+            picture="truc.com/image.jpg",
+            url="truc.com/fiche.html",
         )
         self.product_two = Product.objects.create(
-            name = 'Produit de luxe',
-            brand = 'Monopolprix',
-            code = '9876543210987',
-            nutriscore = 'A',
-            description = 'Cuisiné par les grands',
-            picture = 'truc.com/image.jpg',
-            url = 'truc.com/fiche.html',
+            name="Produit de luxe",
+            brand="Monopolprix",
+            code="9876543210987",
+            nutriscore="A",
+            description="Cuisiné par les grands",
+            picture="truc.com/image.jpg",
+            url="truc.com/fiche.html",
         )
 
-    #- Without query, returns all products
+    # - Without query, returns all products
     def test_search_without_query(self):
-        request = self.client.get(reverse('catalog:search'))
-        self.assertEqual(request.status_code, 200)
-        self.assertEqual(
-            len(request.context['products']),
-            Product.objects.count()
-        )
+        """
+        Conditions:
+        -----------
+        *No product found
 
-    #- Test with a name passed as query
+        Assertions:
+        -----------
+        *Status Code = 200;
+        * All Product objects returned (2).
+        """
+
+        request = self.client.get(reverse("catalog:search"))
+        self.assertEqual(request.status_code, 200)
+        self.assertEqual(len(request.context["products"]),
+            Product.objects.count()
+            )
+
+    # - Test with a name passed as query
     def test_search_with_name_query(self):
-        request = self.client.get(reverse('catalog:search'), {'query':"Produit à manger"})
-        self.assertEqual(request.status_code, 200)
-        self.assertEqual(
-            len(request.context['products']),
-            1
+        """
+        Conditions:
+        -----------
+        *Product does exist.
+
+        Assertions:
+        -----------
+        *Status Code = 200;
+        *Only one Product returned;
+        *The right Product is returned.
+        """
+
+        request = self.client.get(
+            reverse("catalog:search"), {"query": "Produit à manger"}
         )
+        self.assertEqual(request.status_code, 200)
+        self.assertEqual(len(request.context["products"]), 1)
         product = Product.objects.get(name="Produit à manger")
-        self.assertEqual(
-            request.context['products'][0].id,
-            product.id
-        )
-    
-    #- Test with a code passed as query
+        self.assertEqual(request.context["products"][0].id, product.id)
+
+    # - Test with a code passed as query
     def test_search_with_code_query(self):
-        request = self.client.get(reverse('catalog:search'), {'query':"9876543210987"})
+        """
+        Conditions:
+        -----------
+        *Product does exist.
+
+        Assertions:
+        -----------
+        *Status Code = 200;
+        *Only one Product returned;
+        *The right Product is returned.
+        """
+
+        request = self.client.get(reverse("catalog:search"),
+            {"query": "9876543210987"}
+            )
         self.assertEqual(request.status_code, 200)
-        self.assertEqual(
-            len(request.context['products']),
-            1
-        )
+        self.assertEqual(len(request.context["products"]), 1)
         product = Product.objects.get(code="9876543210987")
-        self.assertEqual(
-            request.context['products'][0].id,
-            product.id
-        )
+        self.assertEqual(request.context["products"][0].id, product.id)
