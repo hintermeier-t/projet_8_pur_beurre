@@ -49,7 +49,7 @@ def detail(request, product_id):
         "brand": product.brand,
         "thumbnail": product.picture,
         "url": product.url,
-        "categories": product.categories.all(),
+        "categories":categories,
     }
 
     return render(request, "catalog/detail.html", context)

@@ -1,5 +1,4 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import transaction, IntegrityError
@@ -7,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from catalog.models import Product
 
+from .forms import UserCreationForm, AuthenticationForm
 from .models import Favorite
 from catalog import views as c
 
@@ -24,10 +24,9 @@ def signin(request):
         return redirect("index")
 
     if request.method == "POST":
-
-        username = request.POST["username"]
+        email = request.POST["username"]
         password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
             return redirect("index")
@@ -61,9 +60,9 @@ def signup(request):
 
         if form.is_valid():
             form.save()
-            username = form.cleaned_data["username"]
+            email = form.cleaned_data["email"]
             password = form.cleaned_data["password1"]
-            user = authenticate(username=username, password=password)
+            user = authenticate(username=email, password=password)
             login(request, user)
             return redirect("index")
 
