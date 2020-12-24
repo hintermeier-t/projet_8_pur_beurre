@@ -24,6 +24,7 @@ from catalog.models import Product
 class SigninPageTestCase(TestCase):
     """
     Testing sigin view.
+    
     Attributes (setUp method) :
     ---------------------------
     :self.username (string): username field used to connect and create User
