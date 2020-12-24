@@ -91,9 +91,9 @@ DATABASES = {
     }
 }
 
-SECRET_KEY = "uqC2GOk9 g<<BdQ~i!k+MC" #(
-  #  os.getenv('SECRET_KEY')
-#)
+SECRET_KEY = (
+    os.getenv('SECRET_KEY')
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
