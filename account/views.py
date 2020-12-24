@@ -27,15 +27,8 @@ def signin(request):
         email = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=email, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect("index")
-        else:
-            form = AuthenticationForm()
-            return render(
-                request, "account/signin.html",
-                {"form": form, "Error": "Invalid"}
-            )
+        login(request, user)
+        return redirect("index")
 
     else:
         form = AuthenticationForm()
