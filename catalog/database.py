@@ -92,7 +92,7 @@ class Database:
 
         for product in self.prod:
             try:
-                new_product = models.Product.objects.create(
+                new_product = models.Product.objects.get_or_create(
                     name=product.get("product_name_fr"),
                     brand=product.get("brands"),
                     code=product.get("code"),
