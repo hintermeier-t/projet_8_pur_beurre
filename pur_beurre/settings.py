@@ -80,20 +80,17 @@ WSGI_APPLICATION = "pur_beurre.wsgi.application"
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",  # on utilise l'adaptateur postgresql
-        "NAME": "pur_beurre",  # le nom de notre base de donnees creee precedemment
-        "USER": "thomas",  # attention : remplacez par votre nom d'utilisateur
-        "PASSWORD": "2s7gix9u",
-        "HOST": "",
-        "PORT": "5432",
-        "CHARSET": "UTF-8",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'pur_beurre',
+        'USER': 'oc_admin',
+        'PASSWORD': 'P8NoCookie',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
-SECRET_KEY =  "uqC2GOk9 g<<BdQ~i!k+MC"  """(
-    os.getenv('SECRET_KEY')
-)"""
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
