@@ -11,9 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
-
-import django_heroku
-import dj_database_url
+#import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -84,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pur_beurre',
         'USER': 'thomas',
-        'PASSWORD': '',
+        'PASSWORD': '2s7gix9u',
         'HOST': 'localhost',
         'PORT': '5432',
     }
