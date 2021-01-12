@@ -27,18 +27,7 @@ class SigninPageTestCase(TestCase):
     
     Attributes (setUp method) :
     ---------------------------
-    :self.username (string): username field used to connect and create User
-        object;
-    :self.password (string): password field used to connect and create User
-        object;
-    :self.user (User): Django's User object.
-
-    Tests:
-    ------
-    :test_signin_invalid_credentials(self): Request a connection with wrong
-        credentials (here password);
-    :test_signin_valid_credentials(self): Request a connection with right
-        credentials.
+    :self.username (string): username field usedcatalog/search/?query=nutella
     """
 
     def setUp(self):
@@ -115,23 +104,23 @@ class SignupPageTestCase(TestCase):
 
         Assertions:
         -----------
-        *User 'AlexandreA' doesn't exist before account creation.
-        *User 'AlexandreA' does exist after account creation.
+        *U 'alexandre@astier.fr' doesn't exist before account creation.
+        *User 'alexandre@astier.frxandreA' does exist after account creation.
         """
 
-        user = User.objects.get(username="AlexandreA")
+        user = User.objects.get(username="alexandre@astier.fr")
         self.assertIsNone(user)
         request = self.client.get(reverse("account:signup"))
         self.assertEqual(request.status_code, 200)
         request = self.client.post(
             reverse("account:signup"),
             {
-                "username": "AlexandreA",
+                "username": "alexandre@astier.fr",
                 "password1": "OnEnAGros",
                 "password2": "OnEnAGros",
             },
         )
-        user = User.objects.get(username="AlexandreA")
+        user = User.objects.get(username="alexandre@astier.fr")
         self.assertIsNotNone(user)
 
 
@@ -157,7 +146,7 @@ class AccountPageTestCase(TestCase):
         Tests setup.
         """
 
-        self.username = "MilesD"
+        self.username = "miles@davis.com"
         self.password = "KindOfBlue"
         self.user = User.objects.create_user(
             username=self.username, password=self.password
@@ -200,7 +189,7 @@ class SignoutPageTestcase(TestCase):
         Tests setup.
         """
 
-        self.username = "ChesterB"
+        self.username = "chester@bennington.nu"
         self.password = "InTheEnd"
         self.user = User.objects.create_user(
             username=self.username, password=self.password
@@ -248,11 +237,10 @@ class SaveMailTestCase(TestCase):
         Tests setup.
         """
 
-        self.mail = "moonlight@vermont.com"
-        self.username = "LouisA"
+        self.mail = "louis@armstrong.com"
         self.password = "YouRascalYou"
         self.user = User.objects.create_user(
-            username=self.username, password=self.password
+            email=self.mail, password=self.password
         )
 
     # - test without logged user
@@ -284,12 +272,12 @@ class SaveMailTestCase(TestCase):
         *Content = "209" validated.
         """
         
-        self.client.login(username=self.username, password=self.password)
-        self.assertEqual(self.user.email, "")
+        self.client.login(username=self.mail, password=self.password)
+        self.assertEqual(self.user.email, "louis@armstrong.com")
         self.client.login(username=self.username, password=self.password)
         response = self.client.get(
             reverse("account:mail_save"),
-            {"email": self.mail}
+            {"email": "ella@fitzgerald.jazz"}
             )
         self.assertEqual(response.content, b"209")
 
@@ -322,7 +310,7 @@ class SaveFavoriteTestCase(TestCase):
         Tests setup.
         """
 
-        self.username = "SarahV"
+        self.mail = "sarah@vaughn.com"
         self.password = "LullabyOfBirdland"
         self.product = Product.objects.create(
             name="Produit à manger",
@@ -373,7 +361,7 @@ class SaveFavoriteTestCase(TestCase):
         *Favorite.objects.count() is still the same (0).
         """
         
-        self.client.login(username=self.username, password=self.password)
+        self.client.login(email=self.mail, password=self.password)
         favorites_old_count = Favorite.objects.count()
         request = self.client.get(
             reverse("account:save"),
@@ -396,7 +384,7 @@ class SaveFavoriteTestCase(TestCase):
         * Favorite.objects.count() += 1.
         """
         
-        self.client.login(username=self.username, password=self.password)
+        self.client.login(email=self.mail, password=self.password)
         favorites_old_count = Favorite.objects.count()
         request = self.client.get(
             reverse("account:save"),
@@ -436,7 +424,7 @@ class DeleteFavoriteTestCase(TestCase):
         Tests setup.
         """
 
-        self.username = "SarahV"
+        self.username = "sarah@vaughn.fr"
         self.password = "LullabyOfBirdland"
         self.product = Product.objects.create(
             name="Produit à manger",
@@ -449,7 +437,7 @@ class DeleteFavoriteTestCase(TestCase):
         )
 
         self.user = User.objects.create_user(
-            username=self.username, password=self.password
+            email=self.mail, password=self.password
         )
         self.favorite = Favorite.objects.get_or_create(
             user=self.user, product=self.product
@@ -488,7 +476,7 @@ class DeleteFavoriteTestCase(TestCase):
         *Status code = 404 (Favorite not Found);
         *Favorite.objects.count() is still the same (1).
         """
-        self.client.login(username=self.username, password=self.password)
+        self.client.login(email=self.mail, password=self.password)
         request = self.client.get(reverse("account:delete"), {"product": 0})
         self.assertEqual(request.status_code, 404)
         self.assertEqual(Favorite.objects.count(), 1)
@@ -505,7 +493,7 @@ class DeleteFavoriteTestCase(TestCase):
         *Favorite.objects.count() -= 1.
         """
         
-        self.client.login(username=self.username, password=self.password)
+        self.client.login(email=self.mail, password=self.password)
         request = self.client.get(
             reverse("account:delete"), {"product": self.product.id}
         )
@@ -539,7 +527,7 @@ class MyFavoritePageTestCase(TestCase):
         Tests setup.
         """
 
-        self.username = "DavidB"
+        self.username = "david@bowie.queen"
         self.password = "UnderPressure"
         self.product = Product.objects.create(
             name="Produit à manger",
